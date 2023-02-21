@@ -19,6 +19,8 @@ IMPLEMENT_MODULE(FHealthComponentModule, HealthComponent)
 
 
 #include "Net/UnrealNetwork.h"
+#include "DamageEvent.h"
+#include "HealEvent.h"
 
 TMulticastDelegate<void(UDG_HealthComponent*, const FDG_DamageEvent&)> UDG_HealthComponent::OnTakeDamage_Static;
 
@@ -329,7 +331,7 @@ void UDG_HealthComponent::StopHealthRegen()
 
 void UDG_HealthComponent::AddActorToDamageLog(AActor* Actor, const FDG_DamageEvent& DamageEvent)
 {
-    const int32 Index = DamageLog.IndexOfByKey(FDG_HealthSystemLogItem(Actor));
+    const int32 Index = DamageLog.IndexOfByKey(FDG_HealthComponentLogItem(Actor));
 
     if (Index != INDEX_NONE)
     {
@@ -345,7 +347,7 @@ void UDG_HealthComponent::AddActorToDamageLog(AActor* Actor, const FDG_DamageEve
             DamageLog.RemoveAt(LogSize - 1, 1, false);
         }
 
-        DamageLog.Insert(FDG_HealthSystemLogItem(Actor, Actor ? GetActorName(Actor) : "Unknown", DamageEvent.GetFinalDamage()), 0);
+        DamageLog.Insert(FDG_HealthComponentLogItem(Actor, Actor ? GetActorName(Actor) : "Unknown", DamageEvent.GetFinalDamage()), 0);
     }
     
     if (IsServer())
@@ -376,7 +378,7 @@ void UDG_HealthComponent::AddActorToHealLog(AActor* Actor, const FDG_HealEvent& 
             HealingLog.RemoveAt(LogSize - 1, 1, false);
         }
 
-        HealingLog.Insert(FDG_HealthSystemLogItem(Actor, Actor ? GetActorName(Actor) : "Unknown", HealEvent.GetFinalHeal()), 0);
+        HealingLog.Insert(FDG_HealthComponentLogItem(Actor, Actor ? GetActorName(Actor) : "Unknown", HealEvent.GetFinalHeal()), 0);
     }
 
     if (IsServer())
