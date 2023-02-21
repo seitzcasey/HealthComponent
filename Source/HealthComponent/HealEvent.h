@@ -1,9 +1,9 @@
 #pragma once
-#include "DG_DamageEvent.h"
-#include "DG_HealEvent.generated.h"
+#include "DamageEvent.h"
+#include "HealEvent.generated.h"
 
 USTRUCT(BlueprintType, Blueprintable)
-struct DG_HEALTHSYSTEM_API FDG_HealEvent : public FDG_DamageEvent
+struct HEALTHCOMPONENT_API FDG_HealEvent : public FDG_DamageEvent
 {
     GENERATED_BODY()
 

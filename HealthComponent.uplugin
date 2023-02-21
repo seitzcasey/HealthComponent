@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "1.0",
-	"FriendlyName": "DG_HealthSystem",
+	"FriendlyName": "HealthComponent",
 	"Description": "A simple extensible health system.",
 	"Category": "Other",
 	"CreatedBy": "DirtsleeperGames",
@@ -16,7 +16,7 @@
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "DG_HealthSystem",
+			"Name": "HealthComponent",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}

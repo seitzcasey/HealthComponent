@@ -1,9 +1,9 @@
 #pragma once
 #include "Engine/DamageEvents.h"
-#include "DG_DamageEvent.generated.h"
+#include "DamageEvent.generated.h"
 
 USTRUCT(BlueprintType, Blueprintable)
-struct DG_HEALTHSYSTEM_API FDG_DamageEvent : public FDamageEvent
+struct HEALTHCOMPONENT_API FDG_DamageEvent : public FDamageEvent
 {
     GENERATED_BODY()
 
@@ -49,4 +49,16 @@ protected:
         FinalDamage = NewDamage;
         bDamageModified = true;
     }
+};
+
+UCLASS()
+class HEALTHCOMPONENT_API UDG_DamageType : public UDamageType
+{
+    GENERATED_BODY()
+};
+
+UCLASS()
+class HEALTHCOMPONENT_API UDG_DamageType_Heal : public UDG_DamageType
+{
+    GENERATED_BODY()
 };

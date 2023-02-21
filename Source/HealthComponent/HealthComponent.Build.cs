@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class DG_HealthSystem : ModuleRules
+public class HealthComponent : ModuleRules
 {
-	public DG_HealthSystem(ReadOnlyTargetRules Target) : base(Target)
+	public HealthComponent(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		

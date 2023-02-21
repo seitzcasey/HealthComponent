@@ -1,7 +1,20 @@
 #pragma once
+
+#include "CoreMinimal.h"
+#include "Modules/ModuleManager.h"
+
+class FHealthComponentModule : public IModuleInterface
+{
+public:
+
+	/** IModuleInterface implementation */
+	virtual void StartupModule() override;
+	virtual void ShutdownModule() override;
+};
+
 #include "Components/ActorComponent.h"
-#include "DG_HealthSystemLogItem.h"
-#include "DG_HealthComponent.generated.h"
+#include "HealthComponentLogItem.h"
+#include "HealthComponent.generated.h"
 
 struct FDG_DamageEvent;
 struct FDG_HealEvent;
@@ -10,7 +23,7 @@ class UDamageType;
 class AController;
 
 UCLASS(Blueprintable, BlueprintType, meta = (BlueprintSpawnableComponent))
-class DG_HEALTHSYSTEM_API UDG_HealthComponent : public UActorComponent
+class HEALTHCOMPONENT_API UDG_HealthComponent : public UActorComponent
 {
     GENERATED_BODY()
 
@@ -66,13 +79,13 @@ public:
     UFUNCTION(BlueprintCallable)
     double GetHealthRegenNormalized() const;
 
-    const TArray<FDG_HealthSystemLogItem>& GetDamageLog() const { return DamageLog; }
+    const TArray<FDG_HealthComponentLogItem>& GetDamageLog() const { return DamageLog; }
 
-    TArray<FDG_HealthSystemLogItem> GetDamageLog() { return DamageLog; }
+    TArray<FDG_HealthComponentLogItem> GetDamageLog() { return DamageLog; }
 
-    const TArray<FDG_HealthSystemLogItem>& GetHealingLog() const { return DamageLog; }
+    const TArray<FDG_HealthComponentLogItem>& GetHealingLog() const { return DamageLog; }
 
-    TArray<FDG_HealthSystemLogItem> GetHealingLog() { return HealingLog; }
+    TArray<FDG_HealthComponentLogItem> GetHealingLog() { return HealingLog; }
     // End Getters
 
     // Begin Logging
@@ -226,17 +239,17 @@ protected:
     float LogReplicationRate = 0.5;
 
     // Logging
-    TArray<FDG_HealthSystemLogItem> DamageLog;
+    TArray<FDG_HealthComponentLogItem> DamageLog;
 
-    TArray<FDG_HealthSystemLogItem> HealingLog;
+    TArray<FDG_HealthComponentLogItem> HealingLog;
 
     // The replication logic is separated because these arrays can change a lot between each frame
     UPROPERTY(ReplicatedUsing=OnRep_DamageLog)
-    TArray<FDG_HealthSystemLogItem> ReplicatedDamageLog;
+    TArray<FDG_HealthComponentLogItem> ReplicatedDamageLog;
 
     // The replication logic is separated because these arrays can change a lot between each frame
     UPROPERTY(ReplicatedUsing = OnRep_HealingLog)
-    TArray<FDG_HealthSystemLogItem> ReplicatedHealingLog;
+    TArray<FDG_HealthComponentLogItem> ReplicatedHealingLog;
 
     // This is only used in multiplayer.
     bool bDamageLogDirty = false;
